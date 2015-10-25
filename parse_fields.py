@@ -5,9 +5,10 @@ import re
 import urllib2
 import json
 import config
+from helper import parse_content
 
 def get_latlong(addr):
-	url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+addr+'&key='config.key
+	url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+addr+'&key='+config.key
 	response = urllib2.urlopen(url)
 	address = response.read()
 	the_dict = json.loads(address)
@@ -63,6 +64,11 @@ with open(filename, 'w') as f:
 					d = '+'.join(c)"""
 					#get_latlong(d)
 					#f.write(d + '\n')
-					f.write(ngo_name.encode('utf8')+"\n")
-					f.write(content.encode('utf8')+"\n")
+					#f.write(ngo_name.encode('utf8')+"\n")
+					result = parse_content(content)
+					ngo_address = result[0]
+					ngo_website = result[4]
+					ngo_contact = result[2]
+					print result
+					#f.write(content.encode('utf8')+"\n")
 				flag = False
