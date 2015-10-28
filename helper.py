@@ -15,11 +15,12 @@ Aims/Objectives/Mission : Our mission at AICCO is to provide quality services fo
 
 #print sys.getdefaultencoding()
 def parse_content(content):
-	reload(sys)  
-	sys.setdefaultencoding('utf8')
+	#reload(sys)  
+	#sys.setdefaultencoding('utf8')
 	print "In parse_content"
 	result = []
-	first_split = str(content).encode('utf8').split('Phone:')
+	first_split = content.encode('utf8').split('Phone:')
+	#first_split = content.split('Phone:')
 	address = first_split[0].split('Add.:')[1]
 	result.append(address)
 	second_split = first_split[1].split('Mobile:')

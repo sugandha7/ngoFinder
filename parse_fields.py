@@ -55,7 +55,7 @@ with open(filename, 'w') as f:
 					ngo_name = heading.get_text()
 					article = heading.parent
 					content = article.find('p').get_text()
-
+					#print content
 					"""address = (description['content']).encode('utf8')
 					f.write(str(address) + '\n')
 					#print str(address)+"\n"
@@ -69,6 +69,8 @@ with open(filename, 'w') as f:
 					ngo_address = result[0]
 					ngo_website = result[4]
 					ngo_contact = result[2]
+					ngo_aim = result[7]
+					#print ngo_aim.encode("ascii", "ignore")
 					print result
 					#f.write(content.encode('utf8')+"\n")
 				flag = False
