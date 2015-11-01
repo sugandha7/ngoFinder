@@ -6,8 +6,8 @@ import config
 db = MySQLdb.connect("localhost",config.username, config.password, "ngo" ) #'ngo' is the name of the database.
 
 class writeDB(object):
-    def __init__(self, idno, name, address, latitude, longitude, website, contact):
-        self.id = idno
+    def __init__(self, name, address, latitude, longitude, website, contact):
+        #self.id = idno
         self.name = name
         self.address = address
         self.latitude = latitude

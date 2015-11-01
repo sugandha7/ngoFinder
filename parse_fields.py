@@ -71,6 +71,7 @@ with open(filename, 'w') as f:
 					ngo_contact = result[2]
 					ngo_aim = result[7]
 					#print ngo_aim.encode("ascii", "ignore")
-					print result
+					print ngo_aim
+					f.write(ngo_aim+"\n")
 					#f.write(content.encode('utf8')+"\n")
 				flag = False
