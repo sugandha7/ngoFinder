@@ -2,3 +2,4 @@ config.py
 *.pyc
 out.txt
 project
+query.py
