@@ -31,10 +31,20 @@ def parse_content(content, result):
 	fifth_split = fourth_split[1].split('Contact Person:')
 	website = fifth_split[0].replace('\n', ' ').strip()
 	result.append(website)
-	sixth_split = fifth_split[1].split('Purpose :')
+	if 'Purpose :' in fifth_split[1]:
+        	sixth_split = fifth_split[1].split('Purpose :')
+	else:
+        	sixth_split = fifth_split[1].split('Purpose:')
+
+	#sixth_split = fifth_split[1].split('Purpose :')
 	contact_person = sixth_split[0].replace('\n', ' ').strip()
 	result.append(contact_person)
-	seventh_split = sixth_split[1].split('Aims/Objectives/Mission :')
+	if 'Aims/Objectives/Mission :' in sixth_split[1]:
+        	seventh_split = sixth_split[1].split('Aims/Objectives/Mission :')
+	else:
+        	seventh_split = sixth_split[1].split('Aims/Objectives/Mission:')
+
+	#seventh_split = sixth_split[1].split('Aims/Objectives/Mission :')
 	purpose = seventh_split[0].replace('\n', ' ').strip()
 	result.append(purpose)
 	aim = seventh_split[1].replace('\n', ' ').strip()

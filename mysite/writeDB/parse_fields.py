@@ -33,12 +33,17 @@ def get_latlong(addr):
 	#response.close()
 	the_dict = json.loads(address)
 	list_components = the_dict['results']
-	for element in list_components:
-		if element['geometry']:
-			point = element['geometry']['location']
-			#f.write(str(point) + '\n\n')
-			return point['lat'], point['lng']
-			#break
+	if list_components:
+		for element in list_components:
+			if element['geometry']:
+				point = element['geometry']['location']
+				#f.write(str(point) + '\n\n')
+				return point['lat'], point['lng']
+				#break
+	else:
+		global f
+		f.write(str(addr) +'\n')
+		return 0.0,0.0
 
 
 def form_request(url):
@@ -47,7 +52,8 @@ def form_request(url):
 	return(BeautifulSoup(data))
 
 def get_result():
-	url = "http://delhi.ngosindia.com/delhi-ngos/"
+	url = "http://delhi.ngosindia.com/delhi-ngos-55/"
+	#url = "http://delhi.ngosindia.com/delhi-ngos/"
 	flag = True
 	ngo_website = ""
 	ngo_name = ""
@@ -56,17 +62,19 @@ def get_result():
 	ngo_longitude = 0.0
 	ngo_contact = ""
 	total_result = []
+	global f
+	f = open(filename, 'w')
 	while(flag):
 		soup = form_request(url)
 		categ_list = soup.find('div', {'class': 'ngo-postcontent clearfix'})
 		for a_tag in categ_list.find_all('a'):
 			link = a_tag['href']
 			name = a_tag.get_text()
-			if "Next" in name:
+			if "Next" in name and a_tag['title'] != "Contact Us":
 				url = a_tag['href']
 				flag = True
 			else:
-				if "Previous" not in name:
+				if "Previous" not in name and a_tag['title'] != "Contact Us":
 					ngo_website = link.encode('utf8')
 					#f.write(link.encode('utf8') + '\n')
 					ngo_info = form_request(link)
@@ -98,6 +106,7 @@ def get_result():
 					#f.write(ngo_aim+"\n")
 					#f.write(content.encode('utf8')+"\n")
 				flag = False
+	f.close()
 	return total_result
 #result = get_result()
 # result
