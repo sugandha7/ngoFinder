@@ -52,8 +52,8 @@ def form_request(url):
 	return(BeautifulSoup(data))
 
 def get_result():
-	url = "http://delhi.ngosindia.com/delhi-ngos-55/"
-	#url = "http://delhi.ngosindia.com/delhi-ngos/"
+	#url = "http://delhi.ngosindia.com/delhi-ngos-55/"
+	url = "http://delhi.ngosindia.com/delhi-ngos/"
 	flag = True
 	ngo_website = ""
 	ngo_name = ""

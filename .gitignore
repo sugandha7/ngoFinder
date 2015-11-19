@@ -1,4 +1,5 @@
 config.py
+secret_settings.py
 *.pyc
 out.txt
 project

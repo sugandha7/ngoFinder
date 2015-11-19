@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import secret_settings
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9f2a+se9k+h6)%5n=a-#u-)*oupytbs4*gze0-5va8-i3vem!4'
+SECRET_KEY = secret_settings.key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,8 +80,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ngo',
-	    'USER': 'root',
-        'PASSWORD': 'sugandha123',
+	'USER': secret_settings.user,
+        'PASSWORD': secret_settings.password,
         'HOST': '127.0.0.1',
     }
 }
