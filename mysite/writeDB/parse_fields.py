@@ -6,6 +6,7 @@ import urllib2
 import json
 import config
 from helper import parse_content
+import time
 
 import ssl
 from functools import wraps
@@ -65,6 +66,7 @@ def get_result():
 	global f
 	f = open(filename, 'w')
 	while(flag):
+		time.sleep(1)
 		soup = form_request(url)
 		categ_list = soup.find('div', {'class': 'ngo-postcontent clearfix'})
 		for a_tag in categ_list.find_all('a'):
@@ -77,6 +79,7 @@ def get_result():
 				if "Previous" not in name and a_tag['title'] != "Contact Us":
 					ngo_website = link.encode('utf8')
 					#f.write(link.encode('utf8') + '\n')
+				        time.sleep(1)	
 					ngo_info = form_request(link)
 					description = ngo_info.find('meta', {'name': 'description'})
 					if description is None: #Bad URL
