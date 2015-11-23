@@ -14,3 +14,8 @@ class ngo(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
 
+class address_map(models.Model):
+    address = models.CharField(max_length=255)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+

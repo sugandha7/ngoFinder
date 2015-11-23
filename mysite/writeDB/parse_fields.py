@@ -7,6 +7,7 @@ import json
 import config
 from helper import parse_content
 import time
+from models import address_map
 
 import ssl
 from functools import wraps
@@ -25,6 +26,11 @@ urllib3.contrib.pyopenssl.inject_into_urllib3()
 
 def get_latlong(addr):
 	print addr
+	if(address_map.objects.filter(address=addr)):
+		print "Address found in cache"
+		entry = address_map.objects.get(address=addr)
+		return entry.latitude, entry.longitude
+		
 	#print "In get_latlong"
 	url = 'https://maps.googleapis.com/maps/api/geocode/json?address='+addr+'&key='+config.key
 	#response = urllib2.urlopen(url)
@@ -39,6 +45,8 @@ def get_latlong(addr):
 			if element['geometry']:
 				point = element['geometry']['location']
 				#f.write(str(point) + '\n\n')
+				entry = address_map(address=addr, latitude=point['lat'],longitude=point['lng'])
+				entry.save()
 				return point['lat'], point['lng']
 				#break
 	else:
@@ -66,7 +74,7 @@ def get_result():
 	global f
 	f = open(filename, 'w')
 	while(flag):
-		time.sleep(1)
+		time.sleep(3)
 		soup = form_request(url)
 		categ_list = soup.find('div', {'class': 'ngo-postcontent clearfix'})
 		for a_tag in categ_list.find_all('a'):
@@ -79,7 +87,7 @@ def get_result():
 				if "Previous" not in name and a_tag['title'] != "Contact Us":
 					ngo_website = link.encode('utf8')
 					#f.write(link.encode('utf8') + '\n')
-				        time.sleep(1)	
+				        time.sleep(3)	
 					ngo_info = form_request(link)
 					description = ngo_info.find('meta', {'name': 'description'})
 					if description is None: #Bad URL
