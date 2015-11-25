@@ -74,7 +74,7 @@ def get_result():
 	global f
 	f = open(filename, 'w')
 	while(flag):
-		time.sleep(3)
+		time.sleep(1)
 		soup = form_request(url)
 		categ_list = soup.find('div', {'class': 'ngo-postcontent clearfix'})
 		for a_tag in categ_list.find_all('a'):
@@ -87,7 +87,7 @@ def get_result():
 				if "Previous" not in name and a_tag['title'] != "Contact Us":
 					ngo_website = link.encode('utf8')
 					#f.write(link.encode('utf8') + '\n')
-				        time.sleep(3)	
+				        time.sleep(1)	
 					ngo_info = form_request(link)
 					description = ngo_info.find('meta', {'name': 'description'})
 					if description is None: #Bad URL
@@ -117,6 +117,10 @@ def get_result():
 					#f.write(ngo_aim+"\n")
 					#f.write(content.encode('utf8')+"\n")
 				flag = False
+	f.close()
+	f = open('result.txt', 'w')
+	for result in total_result:
+		f.write(str(result)+ '\n')
 	f.close()
 	return total_result
 #result = get_result()

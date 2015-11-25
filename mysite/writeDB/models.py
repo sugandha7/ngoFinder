@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class ngo(models.Model):
     name = models.CharField(max_length=255)
-    address = models.CharField(max_length=255, unique=True)
+    address = models.CharField(max_length=255)
     phone = models.CharField(max_length=100, blank=True)
     mobile = models.CharField(max_length=100, blank=True)
     email = models.CharField(max_length=100, blank=True)
