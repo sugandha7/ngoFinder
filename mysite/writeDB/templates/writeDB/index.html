@@ -1,0 +1,11 @@
+{% address %}
+    <ul>
+    {% for addr in address %}
+        <li><a href="/">{{ addr }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No addresses are available.</p>
+{% endif %}
+
+

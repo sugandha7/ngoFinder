@@ -25,6 +25,13 @@ urllib3.contrib.pyopenssl.inject_into_urllib3()
 
 
 def get_latlong(addr):
+	"""
+	Input : Address
+	Output : Latitude, Longitude
+	Method : Uses google geocoding API to convert geographical address to its coordinates.
+	If an address has been computed, it is stored in address_map table and coordinates are 
+	searched in that table.
+	"""
 	print addr
 	if(address_map.objects.filter(address=addr)):
 		print "Address found in cache"
@@ -56,11 +63,19 @@ def get_latlong(addr):
 
 
 def form_request(url):
+	"""
+	Input : URL to be requested.
+	Output : Beautiful soup object for the request.
+	"""
 	req  = requests.get(url)
 	data = req.text
 	return(BeautifulSoup(data))
 
 def get_result():
+	"""
+	Input : none
+	Output : total_result which is the list of information of all the NGOs.
+	"""
 	#url = "http://delhi.ngosindia.com/delhi-ngos-55/"
 	url = "http://delhi.ngosindia.com/delhi-ngos/"
 	flag = True
@@ -74,7 +89,7 @@ def get_result():
 	global f
 	f = open(filename, 'w')
 	while(flag):
-		time.sleep(1)
+		time.sleep(3)
 		soup = form_request(url)
 		categ_list = soup.find('div', {'class': 'ngo-postcontent clearfix'})
 		for a_tag in categ_list.find_all('a'):
@@ -87,7 +102,7 @@ def get_result():
 				if "Previous" not in name and a_tag['title'] != "Contact Us":
 					ngo_website = link.encode('utf8')
 					#f.write(link.encode('utf8') + '\n')
-				        time.sleep(1)	
+				        time.sleep(3)	
 					ngo_info = form_request(link)
 					description = ngo_info.find('meta', {'name': 'description'})
 					if description is None: #Bad URL
