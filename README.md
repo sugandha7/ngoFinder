@@ -18,3 +18,4 @@ Steps to store information in the database:
 * Run "python manage.py migrate" from mysite/ directory on the terminal.
 * Run "python manage.py populate writeDB" from mysite/ directory on the terminal.
 
+Once the database is written, run "**python manage.py runserver**" to run the django server at localhost.
