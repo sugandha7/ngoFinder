@@ -1,7 +1,7 @@
-{% if address %}
+{% if location %}
     <ul>
-    {% for addr in address %}
-        <li>{{ addr.address }}</li>
+    {% for loc in address %}
+        <li>{{ loc }}</li>
     {% endfor %}
     </ul>
 {% else %}
